@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>HTML Files Listing</title>
+</head>
+<body>
+  <h1>Available HTML Files</h1>
+  <ul id="file-list"></ul>
+
+  <script>
+    // Example: you provide a JSON file with the list of HTML files
+    // e.g., files.json = ["index.html", "about.html", "contact.html", "gallery.html"]
+    fetch('files.json')
+      .then(response => response.json())
+      .then(files => {
+        const list = document.getElementById('file-list');
+        files.forEach(file => {
+          if (file !== 'index.html' && file.endsWith('.html')) {
+            const li = document.createElement('li');
+            const link = document.createElement('a');
+            link.href = file;
+            link.textContent = file;
+            li.appendChild(link);
+            list.appendChild(li);
+          }
+        });
+      })
+      .catch(err => console.error('Error loading file list:', err));
+  </script>
+</body>
+</html>
